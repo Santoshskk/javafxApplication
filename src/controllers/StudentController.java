@@ -37,6 +37,7 @@ public class StudentController extends Controller{
 
         view.getSchakelButton().setOnAction(actionEvent -> handelSchakelButton());
         view.getNieuwButton().setOnAction(actionEvent -> handelNieuwButton());
+        view.getNieuwButton().disableProperty().bind(view.getListView().getSelectionModel().selectedItemProperty().isNull());
         view.getVerwijderButton().setOnAction(actionEvent -> handleVerwijderButton());
         view.getOpslaanButton().setOnAction(actionEvent -> handelOpslaanButton());
 
@@ -156,11 +157,7 @@ public class StudentController extends Controller{
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            view.getTextField().clear();
-            view.getTextFieldStudentnummer().clear();
-            view.getTextFieldGekregenCijfer().clear();
-            view.getTextAreaFeedback().clear();
-            view.getListView().getSelectionModel().clearSelection();
+           leegAlleInvoervelden();
         }
     }
 
@@ -178,6 +175,7 @@ public class StudentController extends Controller{
         if (result.isPresent() && result.get() == ButtonType.OK) {
             view.getListView().getItems().remove(student);
             MainApplication.getStudentDAO().delete(student);
+            leegAlleInvoervelden();
         }
 
     }
@@ -192,6 +190,14 @@ public class StudentController extends Controller{
 
     public void setStudent(List<Student> student) {
         this.student = student;
+    }
+
+    public void leegAlleInvoervelden(){
+        view.getTextField().clear();
+        view.getTextFieldStudentnummer().clear();
+        view.getTextFieldGekregenCijfer().clear();
+        view.getTextAreaFeedback().clear();
+        view.getListView().getSelectionModel().clearSelection();
     }
 
     @Override

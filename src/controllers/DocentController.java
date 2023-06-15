@@ -33,9 +33,8 @@ public class DocentController extends Controller{
         view.getListView().setItems(docentObservableList);
 
         view.getListView().getSelectionModel().selectedItemProperty().addListener((observableValue, oudeDocent, nieuweDocent) -> {
-            if (nieuweDocent == null) {
-                handelNieuwButton();
-            } else {
+            if (nieuweDocent != null) {
+
                 view.getTextField().setText(nieuweDocent.getNaam());
                 view.getTextFieldVak().setText(String.valueOf(nieuweDocent.getVak()));
                 view.getDatePicker().setValue(nieuweDocent.getAangenomenOp());
@@ -50,6 +49,8 @@ public class DocentController extends Controller{
         // Als niks is aangeklikt in de Listview zal de knop disabeld zijn
         view.getSchakelButton().disableProperty().bind(view.getListView().getSelectionModel().selectedItemProperty().isNull());
         view.getNieuwButton().setOnAction(actionEvent -> handelNieuwButton());
+        view.getNieuwButton().disableProperty().bind(view.getListView().getSelectionModel().selectedItemProperty().isNull());
+
         view.getVerwijderButton().setOnAction(actionEvent -> handleVerwijderButton());
         view.getOpslaanButton().setOnAction(actionEvent-> handelOpslaanbutton() );
 
@@ -141,11 +142,7 @@ public class DocentController extends Controller{
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            view.getTextField().clear();
-            view.getTextFieldVak().clear();
-            view.getDatePicker().setValue(null);
-            view.getCheckbox().setSelected(false);
-            view.getListView().getSelectionModel().clearSelection();
+            leegAlleInvoervelden();
         }
 
     }
@@ -163,9 +160,16 @@ public class DocentController extends Controller{
         if (result.isPresent() && result.get() == ButtonType.OK) {
             view.getListView().getItems().remove(docent);
            MainApplication.getDocentDAO().delete(docent);
-
-
+           leegAlleInvoervelden();
         }
+    }
+
+    public void leegAlleInvoervelden(){
+        view.getTextField().clear();
+        view.getTextFieldVak().clear();
+        view.getDatePicker().setValue(null);
+        view.getCheckbox().setSelected(false);
+        view.getListView().getSelectionModel().clearSelection();
     }
 
 
