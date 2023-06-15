@@ -30,7 +30,7 @@
         <sourceDirectory>src</sourceDirectory>
         <plugins>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <artifactId>            maven-assembly-plugin</artifactId>
                 <configuration>
                     <archive>
                         <manifest>
