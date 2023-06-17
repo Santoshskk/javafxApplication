@@ -14,11 +14,20 @@ public abstract class DocentDAO implements DAO<Docent> {
     }
 
     public Docent getById(int id){
-        if (id >= 0 && id < docenten.size()) {
+        if (id >= 0 && id <= docenten.size()) {
             return docenten.get(id);
         } else {
             return null;
         }}
+
+    public int getIdFor(Docent object) {
+        int index = docenten.indexOf(object);
+        if (index != -1) {
+            return index;
+        } else {
+            return -1;
+        }
+    }
     @Override
     public List<Docent> getAll() {
         return docenten;
@@ -35,8 +44,9 @@ public abstract class DocentDAO implements DAO<Docent> {
 
     @Override
     public void delete(Docent model) {
-        docenten.remove(model);
-
+        if (model != null){
+            docenten.remove(model);
+        }
     }
 
     @Override

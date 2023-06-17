@@ -3,10 +3,7 @@ package practicumopdracht;
 import controllers.Controller;
 import controllers.DocentController;
 import controllers.StudentController;
-import data.DocentDAO;
-import data.DocentDummyDAO;
-import data.StudentDAO;
-import data.StudentDummyDAO;
+import data.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -23,6 +20,8 @@ public class MainApplication extends Application {
     private static DocentDAO docentDAO;
     private static StudentDAO studentDAO;
 
+
+
     @Override
     public void start(Stage stage) {
         if(!Main.launchedFromMain) {
@@ -32,12 +31,17 @@ public class MainApplication extends Application {
             return;
         }
 
-        docentDAO = new DocentDummyDAO();
-        studentDAO = new StudentDummyDAO();
-        MainApplication.getDocentDAO().load();
-        MainApplication.getDocentDAO().save();
-        MainApplication.getStudentDAO().load();
-        MainApplication.getStudentDAO().save();
+//        docentDAO = new DocentDummyDAO();
+//        studentDAO = new StudentDummyDAO();
+
+        docentDAO = new DocentTextDAO();
+        studentDAO = new StudentTextDAO();
+
+//        MainApplication.getDocentDAO().load();
+//        MainApplication.getStudentDAO().load();
+//        MainApplication.getDocentDAO().save();
+//        MainApplication.getStudentDAO().save();
+
 
         stage.setTitle(String.format(TITEL, Main.studentNaam));
         stage.setWidth(WIDTH);

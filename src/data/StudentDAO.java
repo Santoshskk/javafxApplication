@@ -39,7 +39,10 @@ public abstract class StudentDAO implements DAO<Student>{
 
     @Override
     public void delete(Student model) {
-        studenten.remove(model);
+        if (model != null){
+            studenten.remove(model);
+        }
+
     }
 
     @Override

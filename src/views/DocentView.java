@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -11,6 +12,14 @@ import models.Docent;
 
 public class DocentView extends View {
     private GridPane gridPane;
+
+    //De menu knoppen
+    private BorderPane borderPaneBestanden;
+    private MenuBar menuBarKnoppen;
+    private Menu menu;
+    private MenuItem menuItemLaden;
+    private MenuItem menuItemOpslaan;
+    private MenuItem menuItemAfsluiten;
 
     //Texfield
     private Label labelTextField;
@@ -53,6 +62,19 @@ public class DocentView extends View {
     @Override
     protected Parent initializeView() {
         gridPane = new GridPane();
+
+        //Menu knoppen
+        menu = new Menu("Bestand");
+        menuItemLaden = new  MenuItem("Laden");
+        menuItemOpslaan = new MenuItem("Opslaan");
+        menuItemAfsluiten = new MenuItem("Afsluiten");
+        menuBarKnoppen = new MenuBar();
+        borderPaneBestanden = new BorderPane();
+
+        menu.getItems().addAll(menuItemLaden, menuItemOpslaan, menuItemAfsluiten);
+        menuBarKnoppen.getMenus().add(menu);
+        borderPaneBestanden.setTop(menuBarKnoppen);
+        borderPaneBestanden.setMaxWidth(80);
 
 //        Het maken van de TextField
         labelTextField = new Label("Naam:");
@@ -132,6 +154,7 @@ public class DocentView extends View {
 
 
         //Het sorteren van alle Nodes
+        gridPane.add(borderPaneBestanden,0,0);
         gridPane.add(vBox, 0, 1);
         gridPane.add(vBox1, 0, 2);
 
@@ -172,5 +195,17 @@ public class DocentView extends View {
 
     public ListView<Docent> getListView() {
         return listView;
+    }
+
+    public MenuItem getMenuItemLaden() {
+        return menuItemLaden;
+    }
+
+    public MenuItem getMenuItemOpslaan() {
+        return menuItemOpslaan;
+    }
+
+    public MenuItem getMenuItemAfsluiten() {
+        return menuItemAfsluiten;
     }
 }

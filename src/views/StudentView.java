@@ -4,13 +4,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Docent;
 import models.Student;
-
-import java.time.LocalDate;
 
 public class StudentView extends View{
 
@@ -69,7 +68,6 @@ public class StudentView extends View{
         labelcomboboxDocent.setPadding(new Insets(0, 52, 5, 10));
 
         comboBoxDocent = new ComboBox<>();
-        comboBoxDocent.getItems().addAll(new Docent());
         comboBoxDocent.setMinWidth(500);
 
 

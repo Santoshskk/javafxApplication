@@ -17,13 +17,8 @@ public class Student {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Naam:  ").append(naam);
-        sb.append(",  Studentnummer:  ").append(studentnummer);
-        sb.append(",  Gekregen cijfer:  ").append(gekregenCijfer);
-        sb.append("\nFeedback:  ").append(feedback);
-
-        return sb.toString();
+        return String.format("Naam:  %s, Studentnummer:  %d, Gekregen cijfer: %f, Feedback: %s"
+                ,naam,studentnummer,gekregenCijfer,feedback);
     }
 
     public Docent getHoortBij() {

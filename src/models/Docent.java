@@ -6,31 +6,24 @@ public class Docent {
     private String naam;
     private String vak;
     private boolean stagaire;
+
+    private static int autoIncrementId=0;
+    private static int id;
     private LocalDate aangenomenOp;
 
-    public Docent() {
-        this("jan", "jan",false, LocalDate.of(2004 ,10,30));
-    }
 
     public Docent(String naam, String vak, boolean stagaire, LocalDate aangenomenOp) {
+        this.id= autoIncrementId;
+        autoIncrementId++;
         this.naam = naam;
         this.vak = vak;
         this.stagaire = stagaire;
         this.aangenomenOp = aangenomenOp;
     }
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Naam:  ").append(naam);
-        sb.append(",  Vak:  ").append(vak);
-        sb.append(" Is aangenomen op:  ").append(aangenomenOp).append(", \n");
 
-        if (isStagaire()) {
-            sb.append("Stagaire:  ja");
-        } else {
-            sb.append("Stagaire:  nee");
-        }
-
-        return sb.toString();
+        return String.format("Naam:  %s, Vak:  %s, Is aangenomen op: %s, Is stagiare:  %s"
+                ,naam,vak,aangenomenOp,stagaire);
     }
     public String getNaam() {
         return naam;

@@ -27,6 +27,7 @@ public class StudentController extends Controller{
         view = new StudentView();
 
 
+
         ObservableList <Docent> docents = FXCollections.observableArrayList(MainApplication.getDocentDAO().getAll());
         view.getComboBoxDocent().setItems(docents);
 
@@ -110,20 +111,11 @@ public class StudentController extends Controller{
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setContentText("Opgeslagen!");
             alert.showAndWait();
-        } else if(counterror > 0){
-            alert.setContentText(errorMessages.toString());
-            alert.showAndWait();
-        }
-
-        if(counterror==0){
-            alert.setAlertType(Alert.AlertType.INFORMATION);
-            alert.setContentText("Opgeslagen!");
-            alert.showAndWait();
 
             student = view.getListView().getSelectionModel().getSelectedItem();
             //als iets geselecteerd is dan zal hij het updaten anders niet
             if (student == null) {
-                student = new Student(new Docent(), naam, Integer.parseInt(studentnummerString),Double.parseDouble(gekregenCijferString),feedback);
+                student = new Student( view.getComboBoxDocent().getSelectionModel().getSelectedItem(), naam, Integer.parseInt(studentnummerString),Double.parseDouble(gekregenCijferString),feedback);
 
                 view.getListView().getItems().add(student);
 
@@ -137,10 +129,11 @@ public class StudentController extends Controller{
             }
 
             MainApplication.getStudentDAO().addOrUpdate(student);
+            MainApplication.getStudentDAO().save();
 
-
-
-
+        }else {
+            alert.setContentText(errorMessages.toString());
+            alert.showAndWait();
         }
 
 
@@ -162,21 +155,23 @@ public class StudentController extends Controller{
     }
 
     private void handleVerwijderButton(){
-        Student student = view.getListView().getSelectionModel().getSelectedItem();
-        if (student == null) {
+        Student gekozenStudent = view.getListView().getSelectionModel().getSelectedItem();
+        if (gekozenStudent == null) {
             return;
-
         }
         //error code met de keuze om het te verwijderen as er op OK geklikt word
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Weet je zeker dat deze student wilt verwijderen?");
         Optional<ButtonType> result = alert.showAndWait();
-
+        //isPresent is voor de NosuchElement exeption
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            view.getListView().getItems().remove(student);
-            MainApplication.getStudentDAO().delete(student);
+            student.remove(gekozenStudent);
+            MainApplication.getStudentDAO().delete(gekozenStudent);
+            view.getListView().setItems(FXCollections.observableArrayList(student));
             leegAlleInvoervelden();
         }
+
+        view.getListView().refresh();
 
     }
 
@@ -194,9 +189,15 @@ public class StudentController extends Controller{
 
     public void leegAlleInvoervelden(){
         view.getTextField().clear();
+        view.getTextField().setStyle(null);
         view.getTextFieldStudentnummer().clear();
+        view.getTextFieldStudentnummer().setStyle(null);
+
         view.getTextFieldGekregenCijfer().clear();
+        view.getTextFieldGekregenCijfer().setStyle(null);
+
         view.getTextAreaFeedback().clear();
+        view.getTextAreaFeedback().setStyle(null);
         view.getListView().getSelectionModel().clearSelection();
     }
 
