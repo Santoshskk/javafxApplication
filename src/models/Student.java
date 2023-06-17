@@ -1,8 +1,11 @@
 package models;
 
 
-public class Student {
-    private Docent hoortBij;
+import java.io.Serializable;
+
+public class Student implements Serializable, Comparable<Student> {
+    //trantsient zorgt voor het uitsluiten van Serilazition
+    private transient Docent hoortBij;
     private String naam;
     private int studentnummer;
     private double gekregenCijfer;
@@ -17,7 +20,7 @@ public class Student {
     }
 
     public String toString() {
-        return String.format("Naam:  %s, Studentnummer:  %d, Gekregen cijfer: %f, Feedback: %s"
+        return String.format("Naam:  %s, Studentnummer:  %d, Gekregen cijfer: %.1f, Feedback: %s"
                 ,naam,studentnummer,gekregenCijfer,feedback);
     }
 
@@ -59,5 +62,10 @@ public class Student {
 
     public void setFeedback(String feedback) {
         this.feedback = feedback;
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        return 0;
     }
 }

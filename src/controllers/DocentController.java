@@ -1,5 +1,8 @@
 package controllers;
 
+import comparators.DocentComparatorOplopend;
+import comparators.DocentComporatorAflopend;
+import comparators.DocentComporatorDatum;
 import data.DocentDAO;
 import data.DocentDummyDAO;
 import data.DocentTextDAO;
@@ -31,7 +34,6 @@ public class DocentController extends Controller {
 
         List<Docent> docenten = MainApplication.getDocentDAO().getAll();
         docentObservableList = FXCollections.observableArrayList(docenten);
-
         // Bind de observableList aan de ListView in de view
         view.getListView().setItems(docentObservableList);
 
@@ -59,6 +61,15 @@ public class DocentController extends Controller {
         view.getMenuItemOpslaan().setOnAction(actionEvent -> handelOpslaan());
         view.getMenuItemAfsluiten().setOnAction(actionEvent -> handelAfsluiten());
 
+        view.getOplopend().setOnAction(actionEvent -> {
+            FXCollections.sort(view.getListView().getItems(), new DocentComparatorOplopend());
+        });
+        view.getAflopend().setOnAction(actionEvent -> {
+            FXCollections.sort(view.getListView().getItems(), new DocentComporatorAflopend());
+        });
+        view.getDatumOrde().setOnAction(actionEvent -> {
+            FXCollections.sort(view.getListView().getItems(), new DocentComporatorDatum());
+        });
 
     }
 
@@ -83,6 +94,8 @@ public class DocentController extends Controller {
                 view.getListView().setItems(docentObservableList);
             }
         }
+        //bij het opstarten is het standaard georderd op datum
+        FXCollections.sort(view.getListView().getItems(), new DocentComporatorDatum());
     }
 
     private void handelOpslaan() {

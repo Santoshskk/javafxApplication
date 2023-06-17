@@ -1,20 +1,16 @@
 package models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Docent {
+public class Docent implements Serializable, Comparable<Docent>{
     private String naam;
     private String vak;
     private boolean stagaire;
-
-    private static int autoIncrementId=0;
-    private static int id;
     private LocalDate aangenomenOp;
 
 
     public Docent(String naam, String vak, boolean stagaire, LocalDate aangenomenOp) {
-        this.id= autoIncrementId;
-        autoIncrementId++;
         this.naam = naam;
         this.vak = vak;
         this.stagaire = stagaire;
@@ -55,5 +51,10 @@ public class Docent {
 
     public LocalDate getAangenomenOp() {
         return aangenomenOp;
+    }
+
+    @Override
+    public int compareTo(Docent o) {
+        return 0;
     }
 }

@@ -21,6 +21,14 @@ public class DocentView extends View {
     private MenuItem menuItemOpslaan;
     private MenuItem menuItemAfsluiten;
 
+    //sorteren
+    private HBox hBoxSorteerEnBestand;
+    private BorderPane borderPaneSorteren;
+    private MenuBar menuBarKnoppenSorteren;
+    private Menu menuSorteren;
+    private MenuItem aflopend;
+    private MenuItem oplopend;
+    private MenuItem datumOrde;
     //Texfield
     private Label labelTextField;
     private TextField textField;
@@ -74,7 +82,20 @@ public class DocentView extends View {
         menu.getItems().addAll(menuItemLaden, menuItemOpslaan, menuItemAfsluiten);
         menuBarKnoppen.getMenus().add(menu);
         borderPaneBestanden.setTop(menuBarKnoppen);
-        borderPaneBestanden.setMaxWidth(80);
+        borderPaneBestanden.setMaxWidth(180);
+
+        //Menu sorteer knoppen
+        menuSorteren = new Menu("Soorteren");
+        datumOrde = new MenuItem("Oud-Nieuw Datum");
+        aflopend = new  MenuItem("A-Z Oplopend");
+        oplopend = new MenuItem("A-Z Aflopend");
+        menuBarKnoppenSorteren = new MenuBar();
+        borderPaneSorteren = new BorderPane();
+
+        menuSorteren.getItems().addAll(datumOrde, aflopend, oplopend);
+        menuBarKnoppen.getMenus().add(menuSorteren);
+        borderPaneSorteren.setTop(menuBarKnoppenSorteren);
+        borderPaneSorteren.setMaxWidth(180);
 
 //        Het maken van de TextField
         labelTextField = new Label("Naam:");
@@ -148,13 +169,16 @@ public class DocentView extends View {
         hBoxButtons.setSpacing(15);
         hBoxButtons.setAlignment(Pos.BOTTOM_CENTER);
 
+
+
 //        //alles onder elkaar
         vBox = new VBox(hBoxTextField,hBoxTextFieldVak,hBoxDatePicker,hBoxCheckbox);
         vBox1 = new VBox(hBoxButton, hBoxListview, hBoxButtons);
 
-
+        // de sorteer en bestand naast elkaar
+        hBoxSorteerEnBestand = new HBox(borderPaneBestanden, borderPaneSorteren);
         //Het sorteren van alle Nodes
-        gridPane.add(borderPaneBestanden,0,0);
+        gridPane.add(hBoxSorteerEnBestand,0,0);
         gridPane.add(vBox, 0, 1);
         gridPane.add(vBox1, 0, 2);
 
@@ -183,6 +207,18 @@ public class DocentView extends View {
 
     public Button getNieuwButton() {
         return nieuwButton;
+    }
+
+    public MenuItem getAflopend() {
+        return aflopend;
+    }
+
+    public MenuItem getOplopend() {
+        return oplopend;
+    }
+
+    public MenuItem getDatumOrde() {
+        return datumOrde;
     }
 
     public Button getVerwijderButton() {

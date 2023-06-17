@@ -34,13 +34,11 @@ public class MainApplication extends Application {
 //        docentDAO = new DocentDummyDAO();
 //        studentDAO = new StudentDummyDAO();
 
-        docentDAO = new DocentTextDAO();
-        studentDAO = new StudentTextDAO();
+//        docentDAO = new DocentTextDAO();
+//        studentDAO = new StudentTextDAO();
 
-//        MainApplication.getDocentDAO().load();
-//        MainApplication.getStudentDAO().load();
-//        MainApplication.getDocentDAO().save();
-//        MainApplication.getStudentDAO().save();
+        docentDAO = new BinaryDocentDAO();
+        studentDAO = new ObjectStudentDAO();
 
 
         stage.setTitle(String.format(TITEL, Main.studentNaam));

@@ -1,9 +1,7 @@
 package controllers;
 
-import data.DocentDAO;
-import data.DocentDummyDAO;
-import data.StudentDAO;
-import data.StudentDummyDAO;
+import comparators.StudentComporatorCijferAflopend;
+import comparators.StudentComporatorCijfersOplopend;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -26,9 +24,8 @@ public class StudentController extends Controller{
     public StudentController() {
         view = new StudentView();
 
-
-
         ObservableList <Docent> docents = FXCollections.observableArrayList(MainApplication.getDocentDAO().getAll());
+
         view.getComboBoxDocent().setItems(docents);
 
         view.getComboBoxDocent().getSelectionModel().selectedItemProperty().addListener((observableValue, club, studenten) -> {
@@ -49,11 +46,15 @@ public class StudentController extends Controller{
                 view.getTextFieldStudentnummer().setText(String.valueOf(newItem.getStudentnummer()));
                 view.getTextFieldGekregenCijfer().setText(String.valueOf(newItem.getGekregenCijfer()));
                 view.getTextAreaFeedback().setText(newItem.getFeedback());
-
-
             }
         });
 
+        view.getCijferAflopend().setOnAction(actionEvent -> {
+            FXCollections.sort(view.getListView().getItems(), new StudentComporatorCijferAflopend());
+        });
+        view.getCijferOplopend().setOnAction(actionEvent -> {
+            FXCollections.sort(view.getListView().getItems(), new StudentComporatorCijfersOplopend());
+        });
     }
 
     private void handelOpslaanButton(){
@@ -142,6 +143,8 @@ public class StudentController extends Controller{
     private void handelSchakelButton() {
         DocentController docentController = new DocentController();
         MainApplication.switchController(docentController);
+        //bij het opstarten is het standaard georderd op cijfer oplopend
+        FXCollections.sort(view.getListView().getItems(), new StudentComporatorCijferAflopend());
     }
 
     private void handelNieuwButton(){

@@ -14,6 +14,12 @@ import models.Student;
 public class StudentView extends View{
 
     private GridPane gridPane;
+    //menu voor het sorteren
+    private BorderPane borderPaneSorteren;
+    private Menu sorteerMenu;
+    private MenuBar menuBar;
+    private MenuItem cijferAflopend;
+    private MenuItem cijferOplopend;
 
     //ComboboxClub
     private ComboBox<Docent> comboBoxDocent;
@@ -59,9 +65,26 @@ public class StudentView extends View{
     private VBox vBox1;
 
 
+
+
     @Override
     protected Parent initializeView() {
         gridPane = new GridPane();
+
+        // het aanmaken van de sorteer menu
+        menuBar = new MenuBar();
+
+
+        sorteerMenu = new Menu("Sorteren");
+        cijferAflopend = new MenuItem("Hoog-Laag cijfer");
+        cijferOplopend = new MenuItem(" Laag-Hoog cijfer");
+        borderPaneSorteren=new BorderPane();
+
+        sorteerMenu.getItems().addAll(cijferAflopend, cijferOplopend);
+        menuBar.getMenus().add(sorteerMenu);
+        borderPaneSorteren.setTop(menuBar);
+        borderPaneSorteren.setMaxWidth(80);
+
 
         //Het  aanmaken van de Combobox
         labelcomboboxDocent = new Label("Docent: ");
@@ -163,6 +186,7 @@ public class StudentView extends View{
 
 
         //Het sorteren van alle Nodes
+        gridPane.add(borderPaneSorteren,0,0);
         gridPane.add(vBox, 0, 1);
         gridPane.add(vBox1, 0, 2);
 
@@ -207,5 +231,12 @@ public class StudentView extends View{
 
     public Button getSchakelButton() {
         return schakelButton;
+    }
+    public MenuItem getCijferAflopend() {
+        return cijferAflopend;
+    }
+
+    public MenuItem getCijferOplopend() {
+        return cijferOplopend;
     }
 }
