@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 import views.DocentView;
 import views.StudentView;
 
+/**
+ * The type Main application.
+ */
 public class MainApplication extends Application {
 
     private static final String TITEL= "Practicumopdracht OOP2 - %s";
@@ -53,16 +56,31 @@ public class MainApplication extends Application {
 
     }
 
+    /**
+     * Switch controller.
+     *
+     * @param controller the controller
+     */
     public static void switchController(Controller controller) {
         Scene scene = new Scene(controller.getView().getRoot(), WIDTH, HEIGHT);
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Gets docent dao.
+     *
+     * @return the docent dao
+     */
     public static DocentDAO getDocentDAO() {
         return docentDAO;
     }
 
+    /**
+     * Gets student dao.
+     *
+     * @return the student dao
+     */
     public static StudentDAO getStudentDAO() {
         return studentDAO;
     }

@@ -5,6 +5,9 @@ import practicumopdracht.MainApplication;
 
 import java.time.LocalDate;
 
+/**
+ * The type Student dummy dao.
+ */
 public class StudentDummyDAO extends StudentDAO{
     @Override
     public boolean save() {

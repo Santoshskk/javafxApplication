@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.Comparator;
 
 
+/**
+ * de type Docent comporator datum.
+ */
 public class DocentComporatorDatum implements Comparator<Docent> {
 
 

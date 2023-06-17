@@ -4,6 +4,9 @@ import models.Student;
 
 import java.util.Comparator;
 
+/**
+ * de type Student comporator cijfers oplopend.
+ */
 public class StudentComporatorCijfersOplopend implements Comparator<Student> {
 
     @Override

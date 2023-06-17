@@ -5,6 +5,9 @@ import models.Docent;
 import java.util.Comparator;
 
 
+/**
+ * de type Docent comporator aflopend.
+ */
 public class DocentComporatorAflopend implements Comparator<Docent> {
 
     @Override

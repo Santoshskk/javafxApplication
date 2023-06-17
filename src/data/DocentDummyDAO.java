@@ -5,6 +5,9 @@ import models.Docent;
 import javax.print.Doc;
 import java.time.LocalDate;
 
+/**
+ * The type Docent dummy dao.
+ */
 public class DocentDummyDAO extends DocentDAO{
     @Override
     public boolean save() {

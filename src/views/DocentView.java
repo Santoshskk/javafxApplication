@@ -10,6 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import models.Docent;
 
+/**
+ * The type Docent view.
+ */
 public class DocentView extends View {
     private GridPane gridPane;
 
@@ -185,62 +188,137 @@ public class DocentView extends View {
         return gridPane;
     }
 
+    /**
+     * Gets text field.
+     *
+     * @return the text field
+     */
     public TextField getTextField() {
         return textField;
     }
 
+    /**
+     * Gets text field vak.
+     *
+     * @return the text field vak
+     */
     public TextField getTextFieldVak() {
         return textFieldVak;
     }
 
+    /**
+     * Gets date picker.
+     *
+     * @return the date picker
+     */
     public DatePicker getDatePicker() {
         return datePicker;
     }
 
+    /**
+     * Gets checkbox.
+     *
+     * @return the checkbox
+     */
     public CheckBox getCheckbox() {
         return checkbox;
     }
 
+    /**
+     * Gets opslaan button.
+     *
+     * @return the opslaan button
+     */
     public Button getOpslaanButton() {
         return opslaanButton;
     }
 
+    /**
+     * Gets nieuw button.
+     *
+     * @return the nieuw button
+     */
     public Button getNieuwButton() {
         return nieuwButton;
     }
 
+    /**
+     * Gets aflopend.
+     *
+     * @return the aflopend
+     */
     public MenuItem getAflopend() {
         return aflopend;
     }
 
+    /**
+     * Gets oplopend.
+     *
+     * @return the oplopend
+     */
     public MenuItem getOplopend() {
         return oplopend;
     }
 
+    /**
+     * Gets datum orde.
+     *
+     * @return the datum orde
+     */
     public MenuItem getDatumOrde() {
         return datumOrde;
     }
 
+    /**
+     * Gets verwijder button.
+     *
+     * @return the verwijder button
+     */
     public Button getVerwijderButton() {
         return verwijderButton;
     }
 
+    /**
+     * Gets schakel button.
+     *
+     * @return the schakel button
+     */
     public Button getSchakelButton() {
         return schakelButton;
     }
 
+    /**
+     * Gets list view.
+     *
+     * @return the list view
+     */
     public ListView<Docent> getListView() {
         return listView;
     }
 
+    /**
+     * Gets menu item laden.
+     *
+     * @return the menu item laden
+     */
     public MenuItem getMenuItemLaden() {
         return menuItemLaden;
     }
 
+    /**
+     * Gets menu item opslaan.
+     *
+     * @return the menu item opslaan
+     */
     public MenuItem getMenuItemOpslaan() {
         return menuItemOpslaan;
     }
 
+    /**
+     * Gets menu item afsluiten.
+     *
+     * @return the menu item afsluiten
+     */
     public MenuItem getMenuItemAfsluiten() {
         return menuItemAfsluiten;
     }

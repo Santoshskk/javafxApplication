@@ -11,6 +11,9 @@ import javafx.scene.layout.VBox;
 import models.Docent;
 import models.Student;
 
+/**
+ * The type Student view.
+ */
 public class StudentView extends View{
 
     private GridPane gridPane;
@@ -193,49 +196,110 @@ public class StudentView extends View{
         return gridPane;
     }
 
+    /**
+     * Gets combo box docent.
+     *
+     * @return the combo box docent
+     */
     public ComboBox<Docent> getComboBoxDocent() {
         return comboBoxDocent;
     }
 
+    /**
+     * Gets text field.
+     *
+     * @return the text field
+     */
     public TextField getTextField() {
         return textField;
     }
 
+    /**
+     * Gets text field studentnummer.
+     *
+     * @return the text field studentnummer
+     */
     public TextField getTextFieldStudentnummer() {
         return textFieldStudentnummer;
     }
 
+    /**
+     * Gets text field gekregen cijfer.
+     *
+     * @return the text field gekregen cijfer
+     */
     public TextField getTextFieldGekregenCijfer() {
         return textFieldGekregenCijfer;
     }
 
+    /**
+     * Gets text area feedback.
+     *
+     * @return the text area feedback
+     */
     public TextArea getTextAreaFeedback() {
         return textAreaFeedback;
     }
 
+    /**
+     * Gets opslaan button.
+     *
+     * @return the opslaan button
+     */
     public Button getOpslaanButton() {
         return opslaanButton;
     }
 
+    /**
+     * Gets list view.
+     *
+     * @return the list view
+     */
     public ListView<Student> getListView() {
         return listView;
     }
 
+    /**
+     * Gets nieuw button.
+     *
+     * @return the nieuw button
+     */
     public Button getNieuwButton() {
         return nieuwButton;
     }
 
+    /**
+     * Gets verwijder button.
+     *
+     * @return the verwijder button
+     */
     public Button getVerwijderButton() {
         return verwijderButton;
     }
 
+    /**
+     * Gets schakel button.
+     *
+     * @return the schakel button
+     */
     public Button getSchakelButton() {
         return schakelButton;
     }
+
+    /**
+     * Gets cijfer aflopend.
+     *
+     * @return the cijfer aflopend
+     */
     public MenuItem getCijferAflopend() {
         return cijferAflopend;
     }
 
+    /**
+     * Gets cijfer oplopend.
+     *
+     * @return the cijfer oplopend
+     */
     public MenuItem getCijferOplopend() {
         return cijferOplopend;
     }

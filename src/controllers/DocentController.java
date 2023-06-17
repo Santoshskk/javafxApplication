@@ -22,13 +22,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * de type Docent controller.
+ */
 public class DocentController extends Controller {
-
     private DocentView view;
-
     private ObservableList<Docent> docentObservableList;
 
-
+    /**
+     * Instantiates een new Docent controller.
+     */
     public DocentController() {
         view = new DocentView();
 
@@ -52,6 +55,7 @@ public class DocentController extends Controller {
         view.getSchakelButton().disableProperty().bind(view.getListView().getSelectionModel().selectedItemProperty().isNull());
 
         view.getNieuwButton().setOnAction(actionEvent -> handelNieuwButton());
+        // Als niks is aangeklikt in de Listview zal de knop disabeld zijn
         view.getNieuwButton().disableProperty().bind(view.getListView().getSelectionModel().selectedItemProperty().isNull());
 
         view.getVerwijderButton().setOnAction(actionEvent -> handleVerwijderButton());
@@ -61,6 +65,7 @@ public class DocentController extends Controller {
         view.getMenuItemOpslaan().setOnAction(actionEvent -> handelOpslaan());
         view.getMenuItemAfsluiten().setOnAction(actionEvent -> handelAfsluiten());
 
+        // dit zijn de comparators
         view.getOplopend().setOnAction(actionEvent -> {
             FXCollections.sort(view.getListView().getItems(), new DocentComparatorOplopend());
         });
@@ -73,6 +78,9 @@ public class DocentController extends Controller {
 
     }
 
+    /**
+     * dit laad alles van de dao
+     */
     private void handelLaden() {
         Alert ladenAlert = new Alert(Alert.AlertType.CONFIRMATION);
         ladenAlert.setContentText("Wil je de gegevens laden uit de DAO's?");
@@ -98,6 +106,9 @@ public class DocentController extends Controller {
         FXCollections.sort(view.getListView().getItems(), new DocentComporatorDatum());
     }
 
+    /**
+     * slaat alle input op in de dao
+     */
     private void handelOpslaan() {
         Alert opslaanAlert = new Alert(Alert.AlertType.CONFIRMATION);
         opslaanAlert.setContentText("Wil je de gegevens opslaan in de DAO's?");
@@ -119,29 +130,37 @@ public class DocentController extends Controller {
 
     }
 
+    /**
+     * sluit alles af en vraagt om nog een keer op teslaan
+     *
+     */
     private void handelAfsluiten() {
         Alert afsluitenAlert = new Alert(Alert.AlertType.CONFIRMATION);
         afsluitenAlert.setContentText("Wilt je voor het afsluiten nog opslaan?");
         Optional<ButtonType> result = afsluitenAlert.showAndWait();
-            if (result.isPresent() && result.get()== ButtonType.OK) {
-                try {
-                    MainApplication.getDocentDAO().save();
-                    MainApplication.getStudentDAO().save();
-                } catch (Exception e) {
-                    Alert alerterr = new Alert(Alert.AlertType.ERROR, "Er is een fout opgetreden bij het opslaan van de gegevens");
-                    alerterr.showAndWait();
-                }
+        //isPresent is voor de NosuchElement exeption
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                MainApplication.getDocentDAO().save();
+                MainApplication.getStudentDAO().save();
+            } catch (Exception e) {
+                Alert alerterr = new Alert(Alert.AlertType.ERROR, "Er is een fout opgetreden bij het opslaan van de gegevens");
+                alerterr.showAndWait();
             }
-            Alert closeAlert = new Alert(Alert.AlertType.CONFIRMATION, "Weet u zeker dat u wilt afsluiten?");
-            Optional<ButtonType> closeResult = closeAlert.showAndWait();
-            if (closeResult.isPresent() && closeResult.get() == ButtonType.OK) {
-                Stage stage = (Stage) view.getRoot().getScene().getWindow();
-                stage.close();
-            }
+        }
+        Alert closeAlert = new Alert(Alert.AlertType.CONFIRMATION, "Weet u zeker dat u wilt afsluiten?");
+        Optional<ButtonType> closeResult = closeAlert.showAndWait();
+        //isPresent is voor de NosuchElement exeption
+        if (closeResult.isPresent() && closeResult.get() == ButtonType.OK) {
+            Stage stage = (Stage) view.getRoot().getScene().getWindow();
+            stage.close();
+        }
 
     }
 
-
+    /**
+     * dit slaat alles op in de listview
+     */
     private void handelOpslaanbutton() {
         Docent docent;
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -181,7 +200,7 @@ public class DocentController extends Controller {
             view.getDatePicker().setStyle("-fx-border-color: green");
         }
 
-
+        //als alles goed is saved hij het naar de desbetreffende dao
         if (counterror == 0) {
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setContentText("Opgeslagen!");
@@ -209,6 +228,9 @@ public class DocentController extends Controller {
         }
     }
 
+    /**
+     * schakeld van de master naar de detail
+     */
     private void handelSchakelButton() {
         Docent docent = view.getListView().getSelectionModel().getSelectedItem();
         StudentController studentController = new StudentController();
@@ -216,17 +238,23 @@ public class DocentController extends Controller {
         MainApplication.switchController(studentController);
     }
 
+    /**
+     * leegt alle velden zodat er iets getypt kan woren
+     */
     private void handelNieuwButton() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Nieuwe docent toevoegen?");
         Optional<ButtonType> result = alert.showAndWait();
-
+        //isPresent is voor de NosuchElement exeption
         if (result.isPresent() && result.get() == ButtonType.OK) {
             leegAlleInvoervelden();
         }
 
     }
 
+    /**
+     * verwijder de gekozen listview item daarna leegt hij alle velden
+     */
     private void handleVerwijderButton() {
         Docent geselecteerdeDocent = view.getListView().getSelectionModel().getSelectedItem();
         if (geselecteerdeDocent == null) {
@@ -253,6 +281,9 @@ public class DocentController extends Controller {
     }
 
 
+    /**
+     * Leeg alle invoervelden.
+     */
     public void leegAlleInvoervelden() {
         view.getTextField().clear();
         view.getTextField().setStyle(null);

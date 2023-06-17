@@ -6,6 +6,9 @@ import practicumopdracht.MainApplication;
 import java.io.*;
 import java.time.LocalDate;
 
+/**
+ * de type Binary docent dao.
+ */
 public class BinaryDocentDAO extends DocentDAO{
     private final String FILENAME="docent.dat";
     @Override

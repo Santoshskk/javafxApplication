@@ -8,6 +8,9 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * The type Docent text dao.
+ */
 public class DocentTextDAO extends DocentDAO {
 
     private final String FILENAME="docent.text";

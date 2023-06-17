@@ -5,6 +5,9 @@ import practicumopdracht.MainApplication;
 
 import java.io.*;
 
+/**
+ * The type Object student dao.
+ */
 public class ObjectStudentDAO extends StudentDAO implements Serializable {
     private final String FILENAME = "student.obj";
 

@@ -6,6 +6,9 @@ import models.Student;
 
 import java.util.Comparator;
 
+/**
+ * de type Student comporator cijfer aflopend.
+ */
 public class StudentComporatorCijferAflopend implements Comparator<Student> {
 
     @Override

@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * The type Student text dao.
+ */
 public class StudentTextDAO extends StudentDAO {
     private final String FILENAME = "student.text";
 

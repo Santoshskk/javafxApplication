@@ -49,6 +49,8 @@ public class StudentController extends Controller{
             }
         });
 
+        // dit zijn de comparators
+
         view.getCijferAflopend().setOnAction(actionEvent -> {
             FXCollections.sort(view.getListView().getItems(), new StudentComporatorCijferAflopend());
         });
@@ -57,6 +59,9 @@ public class StudentController extends Controller{
         });
     }
 
+    /**
+     * dit slaat alles op in de listview en dao
+     */
     private void handelOpslaanButton(){
         Student student;
         Alert alert= new Alert(Alert.AlertType.WARNING);
@@ -108,6 +113,8 @@ public class StudentController extends Controller{
             view.getTextAreaFeedback().setStyle("-fx-border-color: green");
         }
 
+        //als alles goed is saved hij het naar de desbetreffende dao
+
         if(counterror==0){
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setContentText("Opgeslagen!");
@@ -139,7 +146,9 @@ public class StudentController extends Controller{
 
 
     }
-
+    /**
+     * schakeld van de detail naar de master
+     */
     private void handelSchakelButton() {
         DocentController docentController = new DocentController();
         MainApplication.switchController(docentController);
@@ -147,16 +156,22 @@ public class StudentController extends Controller{
         FXCollections.sort(view.getListView().getItems(), new StudentComporatorCijferAflopend());
     }
 
+    /**
+     * leegt alle velden zodat er iets getypt kan woren
+     */
     private void handelNieuwButton(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Nieuwe student toevoegen?");
         Optional<ButtonType> result = alert.showAndWait();
-
+        //isPresent is voor de NosuchElement exeption
         if (result.isPresent() && result.get() == ButtonType.OK) {
            leegAlleInvoervelden();
         }
     }
 
+    /**
+     * verwijder de gekozen listview item daarna leegt hij alle velden
+     */
     private void handleVerwijderButton(){
         Student gekozenStudent = view.getListView().getSelectionModel().getSelectedItem();
         if (gekozenStudent == null) {
@@ -178,6 +193,10 @@ public class StudentController extends Controller{
 
     }
 
+    /**
+     * geeft de gekozen master weer in de combobox
+     * @param docent
+     */
     public void setUpCombobox(Docent docent) {
         setStudent(MainApplication.getStudentDAO().getAllFor(docent));
         ObservableList<Student> spelerObservableList = FXCollections.observableArrayList(student);
@@ -190,6 +209,10 @@ public class StudentController extends Controller{
         this.student = student;
     }
 
+
+    /**
+     * Leeg alle invoervelden.
+     */
     public void leegAlleInvoervelden(){
         view.getTextField().clear();
         view.getTextField().setStyle(null);
